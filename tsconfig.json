@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(DashboardLayout)/loading.tsx", "src/app/admin/adminpage.jsx", "src/app/admin/layout.tsx", "src/app/admin/layoutServer.jsx", "src/app/login/page.jsx", "src/lib/withAuth.js", "src/app/api/auth/login/route.js", "src/middleware.js", "src/app/api/auth/check/route.js", "src/app/api/students/route.js", "src/app/api/students/[id]/route.js", "src/app/(DashboardLayout)/utilities/studentslist/page.jsx", "src/app/api/teamsmark/route.js", "src/app/(DashboardLayout)/components/dashboard/SalesOverview.tsx", "src/app/(DashboardLayout)/utilities/shadow/page.jsx", "src/app/(DashboardLayout)/components/dashboard/MonthlyEarnings.tsx", "src/app/api/marklist-topperformers/route.js", "src/app/api/grandmark/route.ts", "src/app/layout.tsx", "src/app/(DashboardLayout)/components/home/ImageSlider.tsx"],
+  "exclude": ["node_modules"]
+}
