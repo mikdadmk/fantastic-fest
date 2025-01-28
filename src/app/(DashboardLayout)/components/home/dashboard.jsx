@@ -2,7 +2,13 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaHome, FaTrophy, FaCalendarAlt, FaUserCheck, FaEnvelope } from "react-icons/fa"; // Import icons
+import {
+  FaHome,
+  FaTrophy,
+  FaCalendarAlt,
+  FaUserCheck,
+  FaPhotoVideo, // Import gallery icon
+} from "react-icons/fa";
 
 const DashboardPage = () => (
   <section className="h-screen w-full bg-gray-100 flex flex-col items-center justify-center">
@@ -44,10 +50,10 @@ const DashboardPage = () => (
             Profile Check
           </div>
         </Link>
-        <Link href="/contactus">
+        <Link href="/gallery">
           <div className="bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600 rounded-lg shadow-lg p-4 flex flex-col items-center justify-center text-white text-lg font-semibold md:h-60 h-40 md:w-60">
-            <FaEnvelope className="text-3xl mb-3" />
-            Contact
+            <FaPhotoVideo className="text-3xl mb-3" />
+            Gallery
           </div>
         </Link>
       </div>
