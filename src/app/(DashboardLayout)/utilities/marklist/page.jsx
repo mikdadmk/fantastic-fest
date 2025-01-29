@@ -589,7 +589,7 @@ const MarkList = () => {
                 className="border w-full p-2"
               >
                 <option value="dhamak">Dhamak</option>
-                <option value="Jhalak">Jhalak</option>
+                <option value="jhalak">Jhalak</option>
                 <option value="chamak">Chamak</option>
               </select>
             </label>
