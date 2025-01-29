@@ -175,7 +175,7 @@ const MarkList = () => {
                     <option value="Madhunnabi">Madhunnabi</option>
                     <option value="Ma'shara">Mashara</option>
                     <option value="Jam">Jam</option>
-                    <option value="Va'az">Essay</option>
+                    <option value="Va'az">Va'az</option>
                     <option value="Speech">Speech</option>
                     <option value="Mash Up Song">Mash Up Song</option>
                     <option value="Qira'th">Qirath</option>
@@ -228,7 +228,7 @@ const MarkList = () => {
                     <option value="Poem Writing Malayalam">Poem Writing Malayalam</option>
                     <option value="Letter Writing English">Letter Writing English</option>
                     <option value="Sudoku">Sudoku</option>
-                    <option value="Dictionry Making">Story Telling</option>
+                    <option value="Dictionry Making">Dictionry Making</option>
                     <option value="MS Paint">MS Paint</option>
                     <option value="Story Completion">Story Completion</option>
                     <option value="Tug Of War">Tug Of War</option>
@@ -417,7 +417,7 @@ const MarkList = () => {
                     <option value="Madhunnabi">Madhunnabi</option>
                     <option value="Ma'shara">Mashara</option>
                     <option value="Jam">Jam</option>
-                    <option value="Va'az">Essay</option>
+                    <option value="Va'az">Va'az</option>
                     <option value="Speech">Speech</option>
                     <option value="Mash Up Song">Mash Up Song</option>
                     <option value="Qira'th">Qirath</option>
@@ -442,8 +442,7 @@ const MarkList = () => {
                     <option value="Story Telling">Story Telling</option>
                     <option value="Azan">Azan</option>
                     <option value="Math Talent">Math Talent</option>
-                    <option value="Thaleelul Ibara">Thaleelul Ibara</option>
-                    <option value="Status Video Making">Status Video Making</option>
+                    <option value="Thaleelul Ibara">Thaleelul Ibara</option>      
                     <option value="Short Story Malayalm">Short Story Malayalm</option>
                     <option value="Short Story English">Short Story English</option>
                     <option value="Poem Writing Arabic">Poem Writing Arabic</option>
@@ -470,7 +469,7 @@ const MarkList = () => {
                     <option value="Poem Writing Malayalam">Poem Writing Malayalam</option>
                     <option value="Letter Writing English">Letter Writing English</option>
                     <option value="Sudoku">Sudoku</option>
-                    <option value="Dictionry Making">Story Telling</option>
+                    <option value="Dictionry Making">Dictionry Making</option>
                     <option value="MS Paint">MS Paint</option>
                     <option value="Story Completion">Story Completion</option>
                     
@@ -580,6 +579,7 @@ const MarkList = () => {
                     <option value="Podcast">Podcast</option>
                     <option value="Collage">Collage</option>
                     <option value="Newspapper Making">Newspapper Making</option>
+                    <option value="Status Video Making">Status Video Making</option>
                   </>
                 )}
               </select>
