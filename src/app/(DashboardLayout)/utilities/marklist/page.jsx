@@ -459,7 +459,7 @@ const MarkList = () => {
                     <option value="Heading Making English">Heading Making English</option>
                     <option value="Heading Making Arabic">Heading Making Arabic</option>
                     <option value="Heading Making Urdu">Heading Making Urdu</option>
-                    <option value="Calligraphy">Quiz</option>
+                    <option value="Calligraphy">Calligraphy</option>
                     <option value="Feature Writing Malayalam">Story Telling</option>
                     <option value="Essay Writing Malayalam">Essay Writing Malayalam</option>
                     <option value="Essay Writing English">Essay Writing English</option>
