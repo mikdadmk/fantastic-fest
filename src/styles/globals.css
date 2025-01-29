@@ -1,8 +1,14 @@
 /* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Aesthetic+Romance&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom font class */
+.font-aesthetic {
+  font-family: "Aesthetic Romance", sans-serif;
+}
 
 
 @import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100..800&display=swap');
