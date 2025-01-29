@@ -100,7 +100,7 @@ const WelcomePage = () => {
         className="mb-6 max-w-3xl"
       >
         <h1 className="text-5xl md:text-7xl font-medium font-aesthetic">
-  Fantastic 2k25 Arts & Fest
+  Fantastic 2k25 Arts & Sports Fest
 </h1>
 
         <p className="mt-4 text-lg md:text-2xl font-poppins">
