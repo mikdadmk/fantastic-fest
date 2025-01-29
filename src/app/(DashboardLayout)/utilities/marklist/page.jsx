@@ -488,11 +488,13 @@ const MarkList = () => {
             <label className="block mb-2">
               Position:
               <select name="position" className="border w-full p-2">
-                <option value="First">First</option>
+              <option value="First">First</option>
                 <option value="Second">Second</option>
                 <option value="Third">Third</option>
-                <option value="Fourth">Fourth</option>
-                <option value="Fifth">Fifth</option>
+                <option value="A grade">A grade</option>
+                <option value="B grade">B grade</option>
+                <option value="C grade">C grade</option>
+                <option value="D grade">D grade</option>
               </select>
             </label>
             <label className="block mb-2">
@@ -599,8 +601,10 @@ const MarkList = () => {
                 <option value="First">First</option>
                 <option value="Second">Second</option>
                 <option value="Third">Third</option>
-                <option value="Fourth">Fourth</option>
-                <option value="Fifth">Fifth</option>
+                <option value="A grade">A grade</option>
+                <option value="B grade">B grade</option>
+                <option value="C grade">C grade</option>
+                <option value="D grade">D grade</option>
               </select>
             </label>
             <label className="block mb-2">
