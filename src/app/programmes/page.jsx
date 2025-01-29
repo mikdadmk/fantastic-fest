@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Programmes() {
   const [programmes, setProgrammes] = useState([]);
   const [selectedProgramme, setSelectedProgramme] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Track selected category
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,6 @@ export default function Programmes() {
         setLoading(true);
         setError(null);
 
-        // Fetch data from APIs
         const [studentslistResponse, marklistResponse] = await Promise.all([
           fetch("/api/studentslist"),
           fetch("/api/marklist"),
@@ -29,38 +28,29 @@ export default function Programmes() {
         const studentslist = await studentslistResponse.json();
         const marklist = await marklistResponse.json();
 
-        // Group marklist by programme and include images
         const groupedProgrammes = marklist.reduce((acc, item) => {
-          const student = studentslist.find(
-            (student) => student.chestNumber === item.chestNumber
-          );
+          const student = studentslist.find((s) => s.chestNumber === item.chestNumber);
+          const participant = { ...item, image: student?.image || null };
 
-          const participant = {
-            ...item,
-            image: student?.image || null,
-          };
-
-          acc[item.programme] = acc[item.programme] || [];
-          acc[item.programme].push(participant);
+          if (!acc[item.programme]) {
+            acc[item.programme] = {
+              type: item.type,
+              participants: [],
+            };
+          }
+          acc[item.programme].participants.push(participant);
 
           return acc;
         }, {});
 
-        // Sort participants by position in each programme
-        const sortedProgrammes = Object.entries(groupedProgrammes).map(
-          ([programmeName, participants]) => [
-            programmeName,
-            participants.sort((a, b) => {
-              const positionOrder = ["first", "second", "third"];
-              return (
-                positionOrder.indexOf(a.position.toLowerCase()) -
-                positionOrder.indexOf(b.position.toLowerCase())
-              );
-            }),
-          ]
-        );
+        Object.keys(groupedProgrammes).forEach((programmeName) => {
+          groupedProgrammes[programmeName].participants.sort((a, b) => {
+            const order = { first: 1, second: 2, third: 3 };
+            return (order[a.position.toLowerCase()] || 999) - (order[b.position.toLowerCase()] || 999);
+          });
+        });
 
-        setProgrammes(sortedProgrammes);
+        setProgrammes(groupedProgrammes);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -71,40 +61,32 @@ export default function Programmes() {
     fetchProgrammes();
   }, []);
 
-  const categorizeParticipants = (programmeName, participants) => {
-    const categories = {
-      aliya: [],
-      bidaya: [],
-      thanawiyya: [],
-      general: [],
-    };
-
-    participants.forEach((participant) => {
-      if (participant.category.toLowerCase() === "aliya") {
-        categories.aliya.push(participant);
-      } else if (participant.category.toLowerCase() === "bidaya") {
-        categories.bidaya.push(participant);
-      } else if (participant.category.toLowerCase() === "thanawiyya") {
-        categories.thanawiyya.push(participant);
-      } else {
-        categories.general.push(participant);
-      }
-    });
-
-    return categories;
-  };
-
   const handleProgrammeClick = (programmeName) => {
     if (selectedProgramme === programmeName) {
-      setSelectedProgramme(null); // Toggle off if the same programme is clicked
-      setSelectedCategory(null);  // Reset category selection
+      setSelectedProgramme(null);
+      setSelectedCategory(null);
     } else {
-      setSelectedProgramme(programmeName); // Show details if a different programme is clicked
+      setSelectedProgramme(programmeName);
+      setSelectedCategory(null);
     }
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category); // Show selected category only
+    setSelectedCategory(category);
+  };
+
+  // Function to determine the profile color based on the team name
+  const getProfileColor = (teamName) => {
+    switch (teamName.toLowerCase()) {
+      case "jhalak":
+        return "bg-blue-500";
+      case "dhamak":
+        return "bg-red-500";
+      case "chamak":
+        return "bg-green-500";
+      default:
+        return "bg-gray-500";
+    }
   };
 
   return (
@@ -119,26 +101,27 @@ export default function Programmes() {
       </motion.h1>
 
       {loading && <p className="text-center text-gray-500">Loading...</p>}
-
-      {error && (
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center text-red-500"
-        >
-          {error}
-        </motion.p>
-      )}
+      {error && <p className="text-center text-red-500">{error}</p>}
 
       {!loading && !error && (
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {programmes.map(([programmeName, participants]) => {
-            const categories = categorizeParticipants(programmeName, participants);
-            const isIndividual = programmeName.toLowerCase() !== "general"; // Check if individual programme
+          {Object.entries(programmes).map(([programmeName, { type, participants }]) => {
+            const categories = {
+              aliya: [],
+              bidaya: [],
+              thanawiyya: [],
+              general: [],
+            };
+
+            participants.forEach((p) => {
+              if (p.category.toLowerCase() === "aliya") categories.aliya.push(p);
+              else if (p.category.toLowerCase() === "bidaya") categories.bidaya.push(p);
+              else if (p.category.toLowerCase() === "thanawiyya") categories.thanawiyya.push(p);
+              else categories.general.push(p);
+            });
 
             return (
               <div key={programmeName} className="space-y-4">
-                {/* Programme Card (clickable) */}
                 <motion.div
                   className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 cursor-pointer"
                   onClick={() => handleProgrammeClick(programmeName)}
@@ -151,105 +134,77 @@ export default function Programmes() {
                   </h3>
                 </motion.div>
 
-                {/* If programme is selected, show participants */}
                 {selectedProgramme === programmeName && (
                   <div className="mt-6 space-y-6">
-                    {/* Show Aliya, Bidaya, Thanawiyya categories only if individual programme */}
-                    {isIndividual ? (
+                    {type === "individual" ? (
                       <>
-                        <div className="flex space-x-4 mb-6">
+                        <div className="flex flex-wrap gap-4 mb-6 justify-center">
                           {["aliya", "bidaya", "thanawiyya"].map((category) => (
-                            <button
-                              key={category}
-                              onClick={() => handleCategoryClick(category)}
-                              className={`px-4 py-2 rounded-full text-white font-semibold transition duration-300 ${
-                                selectedCategory === category
-                                  ? "bg-blue-500"
-                                  : "bg-gray-500 hover:bg-gray-600"
-                              }`}
-                            >
-                              {category.charAt(0).toUpperCase() + category.slice(1)}
-                            </button>
+                            categories[category].length > 0 && (
+                              <button
+                                key={category}
+                                onClick={() => handleCategoryClick(category)}
+                                className={`px-4 py-2 rounded-full text-white font-semibold transition duration-300 ${
+                                  selectedCategory === category ? "bg-blue-500" : "bg-gray-500 hover:bg-gray-600"
+                                }`}
+                              >
+                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                              </button>
+                            )
                           ))}
                         </div>
-                        {/* Display selected category participants */}
+
                         {selectedCategory && categories[selectedCategory]?.length > 0 && (
-                          <div>
-                            {categories[selectedCategory].map((participant, index) => (
-                              <motion.div
-                                key={index}
-                                className="bg-white p-5 rounded-lg shadow-lg space-y-4 hover:shadow-xl transition duration-300"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                              >
-                                <div className="flex items-center space-x-4">
-                                  {participant.image ? (
-                                    <img
-                                      src={participant.image}
-                                      alt={`${participant.name}'s profile`}
-                                      className="w-14 h-14 rounded-full object-cover"
-                                    />
-                                  ) : (
-                                    <div className="w-14 h-14 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
-                                      {participant.name.charAt(0).toUpperCase()}
-                                    </div>
-                                  )}
-                                  <div className="space-y-2">
-                                    <p className="font-bold text-gray-800">{participant.name}</p>
-                                    <p className="text-sm text-gray-600">
-                                      <strong>Position:</strong> {participant.position}
-                                    </p>
-                                    <p className="text-sm text-gray-600">
-                                      <strong>Team:</strong> {participant.team}
-                                    </p>
+                          categories[selectedCategory].map((participant, index) => (
+                            <motion.div
+                              key={index}
+                              className="bg-white p-5 rounded-lg shadow-lg space-y-4 hover:shadow-xl transition duration-300"
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: index * 0.1 }}
+                            >
+                              <div className="flex items-center space-x-4">
+                                {participant.image ? (
+                                  <img
+                                    src={participant.image}
+                                    alt={`${participant.name}'s profile`}
+                                    className="w-14 h-14 rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <div className={`w-20 h-20 rounded-full text-white flex items-center justify-center text-base font-bold ${getProfileColor(participant.team)}`}>
+                                    {participant.team}
                                   </div>
+                                )}
+                                <div>
+                                  <p className="font-bold text-gray-800">{participant.name}</p>
+                                  <p className="text-sm text-gray-600"><strong>Position:</strong> {participant.position}</p>
+                                  <p className="text-sm text-gray-600"><strong>Team:</strong> {participant.team}</p>
                                 </div>
-                              </motion.div>
-                            ))}
-                          </div>
+                              </div>
+                            </motion.div>
+                          ))
                         )}
                       </>
                     ) : (
-                      // If "General", only show general participants
-                      <div>
-                        {categories.general.length > 0 && (
-                          <div>
-                            {categories.general.map((participant, index) => (
-                              <motion.div
-                                key={index}
-                                className="bg-white p-5 rounded-lg shadow-lg space-y-4 hover:shadow-xl transition duration-300"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                              >
-                                <div className="flex items-center space-x-4">
-                                  {participant.image ? (
-                                    <img
-                                      src={participant.image}
-                                      alt={`${participant.name}'s profile`}
-                                      className="w-14 h-14 rounded-full object-cover"
-                                    />
-                                  ) : (
-                                    <div className="w-14 h-14 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
-                                      {participant.name.charAt(0).toUpperCase()}
-                                    </div>
-                                  )}
-                                  <div className="space-y-2">
-                                    <p className="font-bold text-gray-800">{participant.name}</p>
-                                    <p className="text-sm text-gray-600">
-                                      <strong>Position:</strong> {participant.position}
-                                    </p>
-                                    <p className="text-sm text-gray-600">
-                                      <strong>Team:</strong> {participant.team}
-                                    </p>
-                                  </div>
-                                </div>
-                              </motion.div>
-                            ))}
+                      categories.general.map((participant, index) => (
+                        <motion.div
+                          key={index}
+                          className="bg-white p-5 rounded-lg shadow-lg space-y-4 hover:shadow-xl transition duration-300"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="flex items-center space-x-4">
+                            <div className={`w-20 h-20 rounded-full text-white flex items-center justify-center text-base font-bold ${getProfileColor(participant.team)}`}>
+                              {participant.team}
+                            </div>
+                            <div>
+                              <p className="font-bold text-gray-800">{participant.name}</p>
+                              <p className="text-sm text-gray-600"><strong>Team:</strong> {participant.team}</p>
+                            </div>
                           </div>
-                        )}
-                      </div>
+                        </motion.div>
+                      ))
                     )}
                   </div>
                 )}
