@@ -13,7 +13,7 @@ Before you begin, make sure you have the following installed on your local machi
 ## Getting Started
 
 # 1. Clone the repository
-[git clone https://github.com/your-username/your-repository-name.git](https://github.com/mikdadmk/fantastic-fest)
+https://github.com/mikdadmk/fantastic-fest <br/>
 cd fantastic-fest
 
 # 2. Install dependencies
@@ -23,10 +23,10 @@ npm install
 npm install --legacy-peer-deps
 
 # 3. Set up environment variables
-echo "DATABASE_URL=mongodb://localhost:27017/" >> .env
-echo "CLOUDINARY_CLOUD_NAME=example" >> .env
-echo "CLOUDINARY_API_KEY=873895146482516" >> .env
-echo "CLOUDINARY_API_SECRET=kuX82dWw88GiJnDXvnE7OIypkwk" >> .env
+DATABASE_URL=mongodb://localhost:27017/ <br/>
+CLOUDINARY_CLOUD_NAME=example <br/>
+CLOUDINARY_API_KEY=873895146482516 <br/>
+CLOUDINARY_API_SECRET=kuX82dWw88GiJnDXvnE7OIypkwk <br/>
 
 # 4. Build the project
 npm run build
