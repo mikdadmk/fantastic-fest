@@ -39,7 +39,7 @@ export async function POST(req) {
 
     // Handle general entries (type === "general")
     if (body.type === "general") {
-      if (!body.team || !["dhamak", "chalak", "chamak"].includes(body.team)) {
+      if (!body.team || !["dhamak", "jhalak", "chamak"].includes(body.team)) {
         return new Response(
           JSON.stringify({ error: "Invalid team for general entry." }),
           { status: 400 }
