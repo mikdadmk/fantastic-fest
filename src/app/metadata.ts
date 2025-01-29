@@ -22,5 +22,10 @@ export const metadata = {
       description: "Join us for an unforgettable experience of creativity and culture at Fantastic 2k25!",
       images: ["https://res.cloudinary.com/dhksqekbo/image/upload/v1737868178/fantastic-logo_aqa6bo.png"],
     },
-  };
-  
+    icons: {
+      icon: "/images/logos/favicon-fantastic.png", // Default favicon
+      shortcut: "/images/logos/favicon-fantastic.png", // Shortcut icon for browsers
+      apple: "/images/logos/favicon-fantastic.png", // Apple touch icon
+      other: [{ rel: "icon", type: "image/svg+xml", url: "/images/logos/favicon-fantastic.svg" }], // SVG icon for modern browsers
+    },
+};
