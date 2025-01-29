@@ -30,13 +30,13 @@ const Menuitems = [
     id: uniqueId(),
     title: "teams",
     icon: IconTypography,
-    href: "/utilities/studentslist",
+    href: "admin/studentslist",
   },
   {
     id: uniqueId(),
     title: "mark",
     icon: IconCopy,
-    href: "/utilities/marklist",
+    href: "admin/marklist",
   },
   {
     navlabel: true,
