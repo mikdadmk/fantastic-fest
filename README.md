@@ -13,8 +13,8 @@ Before you begin, make sure you have the following installed on your local machi
 ## Getting Started
 
 # 1. Clone the repository
-git clone https://github.com/your-username/your-repository-name.git
-cd your-repository-name
+[git clone https://github.com/your-username/your-repository-name.git](https://github.com/mikdadmk/fantastic-fest)
+cd fantastic-fest
 
 # 2. Install dependencies
 npm install
