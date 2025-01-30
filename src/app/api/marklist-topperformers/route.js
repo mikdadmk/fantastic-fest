@@ -5,16 +5,27 @@ export async function GET(req) {
     const db = await connectToDatabase();
     const params = new URL(req.url).searchParams;
     const filter = params.get("filter");
+    const chestNumber = params.get("chestNumber");
+
+    if (chestNumber) {
+      // Fetch specific performer's results
+      const performerResults = await db
+        .collection("marklist")
+        .find({ chestNumber })
+        .toArray();
+      return new Response(JSON.stringify(performerResults), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     const marklistQuery = db.collection("marklist").find();
 
     // Apply filters
     if (filter) {
       if (filter === "general") {
-        // Filter for general teams only
         marklistQuery.filter({ type: "general" });
       } else {
-        // Filter for specific team or category
         marklistQuery.filter({ $or: [{ team: filter }, { category: filter }] });
       }
     }
@@ -25,7 +36,6 @@ export async function GET(req) {
     const totalMarks = marklist.reduce((acc, item) => {
       const mark = Number(item.mark);
       if (filter === "general") {
-        // Calculate marks grouped by team for general type
         acc[item.team] = (acc[item.team] || 0) + mark;
       } else {
         acc[item.chestNumber] = (acc[item.chestNumber] || 0) + mark;
@@ -34,7 +44,6 @@ export async function GET(req) {
     }, {});
 
     if (filter === "general") {
-      // Return top teams based on general type marks
       const topTeams = Object.entries(totalMarks)
         .map(([team, totalMark]) => ({ team, totalMark }))
         .sort((a, b) => b.totalMark - a.totalMark);
@@ -44,7 +53,6 @@ export async function GET(req) {
         headers: { "Content-Type": "application/json" },
       });
     } else {
-      // Return individual performers
       const performersList = Object.entries(totalMarks)
         .map(([chestNumber, totalMark]) => {
           const student = studentslist.find((s) => s.chestNumber === chestNumber);
