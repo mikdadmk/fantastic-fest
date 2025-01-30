@@ -122,7 +122,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 <div align="center">
 
-Special thanks to the **Islamic Da'wa Academy**, our contributors, mentors, and the open-source community for their support and inspiration!
+Special thanks to the **Islamic Da'wa Academy**, our contributors, mentors, and everyone for their support and inspiration!
 
 ---
 
