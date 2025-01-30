@@ -114,7 +114,6 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ### Let’s Build Something Amazing Together!
 
-[![Email](https://img.shields.io/badge/Email-your-email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:hello@salmanmp.me)
 [![Website](https://img.shields.io/badge/Website-fantastic.dawaacademy.in-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://fantastic.dawaacademy.in/)
 
 </div>
