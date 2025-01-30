@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Avatar, Stack, Typography, Box, FormControl, Select, MenuItem, InputLabel } from "@mui/material";
 import { motion } from "framer-motion";
 
@@ -16,11 +16,8 @@ const AllPerformers: React.FC = () => {
   const [performers, setPerformers] = useState<Performer[]>([]);
   const [filter, setFilter] = useState<string>("");
 
-  useEffect(() => {
-    fetchPerformers();
-  }, [filter]);
-
-  const fetchPerformers = async () => {
+  // Memoizing fetchPerformers using useCallback
+  const fetchPerformers = useCallback(async () => {
     try {
       const query = new URLSearchParams();
       if (filter) query.append("filter", filter);
@@ -31,7 +28,11 @@ const AllPerformers: React.FC = () => {
     } catch (error) {
       console.error("Error fetching performers:", error);
     }
-  };
+  }, [filter]); // Adding filter as a dependency
+
+  useEffect(() => {
+    fetchPerformers();
+  }, [fetchPerformers]); // Now fetchPerformers is a stable function reference
 
   return (
     <Box p={3} sx={{ background: "linear-gradient(135deg, #f1f1f1, #c5e1e5)", borderRadius: "12px" }}>

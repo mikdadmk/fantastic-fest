@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Grid, Typography, Tooltip, Fab } from "@mui/material";
 import { motion } from "framer-motion";
 import DownloadIcon from "@mui/icons-material/Download";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Import the back icon
+import Image from "next/image"; // Import the Image component from next/image
+import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 
 // Image Type
 interface Image {
@@ -15,6 +17,8 @@ interface Image {
 const GalleryPage = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const router = useRouter(); // Hook for navigating
 
   // Fetch images from the backend
   const fetchImages = async () => {
@@ -41,101 +45,71 @@ const GalleryPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      style={{ padding: "20px", minHeight: "100vh", backgroundColor: "#f9f9f9" }}
+      className="p-6 min-h-screen bg-gray-50"
     >
-      <Typography
-        variant="h4"
-        align="center"
-        sx={{ marginBottom: "30px", fontWeight: "bold", color: "#333" }}
+      {/* Back Button */}
+      <button
+        onClick={() => router.back()} // Navigate back
+        className="absolute top-5 left-4 z-10 p-2 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition-all"
       >
+        <ArrowBackIcon />
+      </button>
+
+      <h2 className="text-3xl font-extrabold text-center text-gray-800  mb-12">
         Complete Gallery
-      </Typography>
+      </h2>
 
       {loading ? (
-        <Typography variant="h6" align="center" sx={{ color: "#666" }}>
-          Loading...
-        </Typography>
+        <p className="text-lg text-center text-gray-600">Loading...</p>
       ) : images.length === 0 ? (
-        <Typography variant="h6" align="center" sx={{ color: "#666" }}>
+        <p className="text-lg text-center text-gray-600">
           No images found in the gallery.
-        </Typography>
+        </p>
       ) : (
-        <Grid container spacing={3} justifyContent="center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {images.map((image, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
+            <motion.div
               key={image.id}
-              sx={{ display: "flex", justifyContent: "center" }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setSelectedImage(image.url)} // Set selected image on click
+              className={`relative cursor-pointer rounded-xl overflow-hidden shadow-lg bg-white transition-all duration-300 transform ${
+                selectedImage === image.url ? "scale-105 border-4 border-orange-500" : ""
+              }`}
             >
+              <div className="relative w-full h-0 pb-[56.25%]"> {/* 16:9 aspect ratio container */}
+                <Image
+                  src={image.url}
+                  alt={image.title || "Gallery image"} // Fallback if title is missing
+                  layout="fill"
+                  objectFit="cover" // Ensures proper image scaling
+                  className="w-full h-full rounded-t-xl"
+                />
+              </div>
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-                whileHover={{ scale: 1.05 }}
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  maxWidth: "300px",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-                  backgroundColor: "#fff",
+                whileHover={{ opacity: 1 }}
+                className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white p-4 opacity-0 text-center transition-all"
+              >
+                <p className="text-lg font-medium">{image.title}</p>
+              </motion.div>
+              <button
+                className="absolute bottom-4 right-4 z-10 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering onClick for selecting image
+                  window.open(image.url, "_blank");
                 }}
               >
-                <img
-                  src={image.url}
-                  alt={image.title}
-                  style={{
-                    width: "100%",
-                    height: "300px",
-                    objectFit: "cover",
-                  }}
-                />
-                <motion.div
-                  whileHover={{
-                    opacity: 1,
-                  }}
-                  style={{
-                    position: "absolute",
-                    bottom: "0",
-                    left: "0",
-                    right: "0",
-                    backgroundColor: "rgba(0, 0, 0, 0.6)",
-                    color: "#fff",
-                    padding: "10px",
-                    opacity: 0,
-                    textAlign: "center",
-                  }}
-                >
-                  <Typography variant="body1">{image.title}</Typography>
-                </motion.div>
-                <Tooltip title="Download Image" arrow>
-                  <Fab
-                    size="small"
-                    color="primary"
-                    onClick={() => window.open(image.url, "_blank")}
-                    sx={{
-                      position: "absolute",
-                      bottom: "15px",
-                      right: "15px",
-                      zIndex: 10,
-                    }}
-                  >
-                    <DownloadIcon />
-                  </Fab>
-                </Tooltip>
-              </motion.div>
-            </Grid>
+                <DownloadIcon />
+              </button>
+            </motion.div>
           ))}
-        </Grid>
+        </div>
       )}
     </motion.div>
   );

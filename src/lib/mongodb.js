@@ -6,18 +6,12 @@ let clientPromise;
 if (process.env.NODE_ENV === 'development') {
   // In development, use a global variable so the MongoClient is not repeatedly instantiated
   if (!global._mongoClientPromise) {
-    global._mongoClientPromise = MongoClient.connect(process.env.DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    global._mongoClientPromise = MongoClient.connect(process.env.DATABASE_URL);
   }
   clientPromise = global._mongoClientPromise;
 } else {
   // In production, it's safe to just use the client directly
-  clientPromise = MongoClient.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  clientPromise = MongoClient.connect(process.env.DATABASE_URL);
 }
 
 export async function connectToDatabase() {

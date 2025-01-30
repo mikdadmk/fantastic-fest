@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link"; // Import Link for navigation
+import Image from "next/image"; // Import Image for optimized images
 
 const WelcomePage = () => {
   useEffect(() => {
@@ -86,11 +87,13 @@ const WelcomePage = () => {
 
       {/* Logo in top-left corner */}
       <div className="absolute top-5 left-5  w-20 h-20 md:top-[4rem] md:left-[4rem] bg-white p-2 flex items-center justify-center rounded-full shadow-lg">
-        <img
-          src="https://res.cloudinary.com/dhksqekbo/image/upload/v1737868178/fantastic-logo_aqa6bo.png"
-          alt="fantastic-logo"
-          className="w-full h-full object-contain"
-        />
+      <Image
+  src="https://res.cloudinary.com/dhksqekbo/image/upload/v1737868178/fantastic-logo_aqa6bo.png"
+  alt="fantastic-logo"
+  width={500} // Specify the width (adjust as needed)
+  height={500} // Specify the height (adjust as needed)
+  className="w-full h-full object-contain"
+/>
       </div>
 
       <motion.div

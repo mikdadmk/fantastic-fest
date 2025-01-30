@@ -175,7 +175,7 @@ const MarkList = () => {
                     <option value="Madhunnabi">Madhunnabi</option>
                     <option value="Ma'shara">Mashara</option>
                     <option value="Jam">Jam</option>
-                    <option value="Va'az">Va'az</option>
+                    <option value="Va'az">Vaaz</option>
                     <option value="Speech">Speech</option>
                     <option value="Mash Up Song">Mash Up Song</option>
                     <option value="Qira'th">Qirath</option>
@@ -218,7 +218,7 @@ const MarkList = () => {
                     <option value="Heading Making Arabic">Heading Making Arabic</option>
                     <option value="Heading Making Urdu">Heading Making Urdu</option>
                     <option value="Calligraphy">Quiz</option>
-                    <option value="Feature Writing Malayalam">Story Telling</option>
+                    <option value="Feature Writing Malayalam">Feature Writing Malayalam</option>
                     <option value="Essay Writing Malayalam">Essay Writing Malayalam</option>
                     <option value="Essay Writing English">Essay Writing English</option>
                     <option value="Essay Writing Arabic">Essay Writing Arabic</option>
@@ -417,7 +417,7 @@ const MarkList = () => {
                     <option value="Madhunnabi">Madhunnabi</option>
                     <option value="Ma'shara">Mashara</option>
                     <option value="Jam">Jam</option>
-                    <option value="Va'az">Va'az</option>
+                    <option value="Va'az">Vaaz</option>
                     <option value="Speech">Speech</option>
                     <option value="Mash Up Song">Mash Up Song</option>
                     <option value="Qira'th">Qirath</option>
@@ -431,7 +431,7 @@ const MarkList = () => {
                     <option value="Extemporay Speech Arabic">Extemporay Speech Arabic</option>
                     <option value="Mappila Pattu">Mappila Pattu</option>
                     <option value="Song Urdu">Song Urdu</option>
-                    <option value="Song English"></option>
+                    <option value="Song English">Song English</option>
                     <option value="Motivation Speech">Motivation Speech</option>
                     <option value="Quthuba">Qutuba</option>
                     <option value="Tadrees">Tadrees</option>

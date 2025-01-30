@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ProfileCheck() {
   const [chestNumber, setChestNumber] = useState("");
@@ -118,11 +119,13 @@ export default function ProfileCheck() {
                 transition={{ delay: index * 0.1 }}
               >
                 {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={`${item.name}'s profile`}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+                 <Image
+                 src={item.image}
+                 alt={`${item.name}'s profile`}
+                 width={48} // Set the appropriate width
+                 height={48} // Set the appropriate height
+                 className="rounded-full object-cover" // Keep the class for styling
+               />
                 ) : (
                   <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
                     {item.name.charAt(0).toUpperCase()}
