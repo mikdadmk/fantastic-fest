@@ -59,12 +59,10 @@ Fantastic Fest is a modern web application designed to streamline the management
 ### Media Management
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 
+
 ## Hosted On
+
 <img src="https://img.shields.io/badge/Digibayt_Server-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Digibayt Cloud Server">
-
-## Hosted On
-
-  <img src="https://img.shields.io/badge/Digibayt_Server-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" alt="Digibayt Cloud Server">
 
 ### App & Database
 
