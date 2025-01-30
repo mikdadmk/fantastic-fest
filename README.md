@@ -66,8 +66,8 @@ Fantastic Fest is a modern web application designed to streamline the management
 
 ### App & Database
 
-- **Application**: Hosted on Digibayt Cloud Server.
-- **Database**: **MongoDB** - Managed on Digibayt Cloud Server.
+**Application**: Hosted on Digibayt Cloud Server.
+**Database**: **MongoDB** - Managed on Digibayt Cloud Server.
 
 
 </div>
