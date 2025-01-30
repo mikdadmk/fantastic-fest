@@ -126,7 +126,7 @@ const AllPerformers: React.FC = () => {
       <Dialog open={open} onClose={() => setOpen(false)}>
         <Box p={3} sx={{ minWidth: 300 }}>
           <Typography variant="h5" fontWeight="700" sx={{ textAlign: "center", mb: 2 }}>
-            {selectedPerformer?.name}s Results
+            {selectedPerformer?.name} Results
           </Typography>
           {performerResults.length > 0 ? (
             performerResults.map((result, index) => (
