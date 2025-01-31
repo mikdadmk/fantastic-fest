@@ -8,9 +8,9 @@ const AboutPage = () => (
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="max-w-4xl text-center font-poppins"
+      className="max-w-4xl text-center font-poppins" // This will apply Poppins to everything inside the div
     >
-      <h2 className="text-4xl font-bold mb-4">About the Fest</h2>
+      <h2 className="text-4xl font-bold mb-4">About the Fest</h2> {/* Heading with font-poppins */}
       <p className="text-lg md:text-xl text-gray-600">
         Welcome to Fantastic 2k25, the premier arts and sports fest at Islamic Da&apos;wa Academy! 
         This annual event is dedicated to upskilling the talents of our exceptional Huffaz, 
