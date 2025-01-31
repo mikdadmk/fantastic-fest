@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 export default function ProfileCheck() {
   const [chestNumber, setChestNumber] = useState("");
@@ -64,10 +67,15 @@ export default function ProfileCheck() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+    <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex items-center justify-center p-6">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
+        <Link href="/result" passHref>
+          <IconButton component="a" sx={{ mb: 2 }}>
+            <ArrowBackIcon />
+          </IconButton>
+        </Link>
         <motion.h1
-          className="text-3xl font-bold text-gray-800 text-center mb-6"
+          className="text-4xl font-extrabold text-gray-900 text-center mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -75,17 +83,17 @@ export default function ProfileCheck() {
           Profile Check
         </motion.h1>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <input
             type="text"
             value={chestNumber}
             onChange={(e) => setChestNumber(e.target.value)}
             placeholder="Enter Chest Number"
-            className="border border-gray-300 rounded px-4 py-2 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 rounded-lg px-4 py-3 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
           <button
             onClick={handleSearch}
-            className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition"
+            className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-3 rounded-lg transition"
           >
             Search
           </button>
@@ -105,7 +113,7 @@ export default function ProfileCheck() {
 
         {data.length > 0 && (
           <motion.div
-            className="mt-6 space-y-4"
+            className="mt-6 space-y-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -113,36 +121,33 @@ export default function ProfileCheck() {
             {data.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex items-center bg-gray-50 p-4 rounded shadow space-x-4"
+                className="flex items-center bg-gray-100 p-4 rounded-lg shadow space-x-4"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
               >
                 {item.image ? (
-                 <Image
-                 src={item.image}
-                 alt={`${item.name}'s profile`}
-                 width={48} // Set the appropriate width
-                 height={48} // Set the appropriate height
-                 className="rounded-full object-cover" // Keep the class for styling
-               />
+                  <Image
+                    src={item.image}
+                    alt={`${item.name}'s profile`}
+                    width={48}
+                    height={48}
+                    className="rounded-full object-cover"
+                  />
                 ) : (
-                  <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
+                  <div className="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xl font-bold">
                     {item.name.charAt(0).toUpperCase()}
                   </div>
                 )}
                 <div>
-                  <p className="font-bold text-gray-800">{item.name}</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="font-bold text-gray-900">{item.name}</p>
+                  <p className="text-sm text-gray-700">
                     <strong>Programme:</strong> {item.programme}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     <strong>Position:</strong> {item.position}
                   </p>
-                  {/* <p className="text-sm text-gray-600">
-                    <strong>Category:</strong> {item.category}
-                  </p> */}
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     <strong>Team:</strong> {item.team}
                   </p>
                 </div>
