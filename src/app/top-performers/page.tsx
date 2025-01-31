@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Avatar, Stack, Typography, Box, FormControl, Select, MenuItem, InputLabel, Button, Dialog } from "@mui/material";
+import { Avatar, Stack, Typography, Box, FormControl, Select, MenuItem, InputLabel, Button, Dialog, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Link from 'next/link';
 
 interface Performer {
   chestNumber?: string;
@@ -63,7 +65,20 @@ const AllPerformers: React.FC = () => {
 
   return (
     <Box p={3} sx={{ background: "linear-gradient(135deg, #f1f1f1, #c5e1e5)", borderRadius: "12px" }}>
-      <Typography variant="h4" fontWeight="700" gutterBottom sx={{ textAlign: "center", color: "#2c3e50" }}>
+      <Link href="/result" passHref>
+        <IconButton component="a" sx={{ mb: 2 }}>
+          <ArrowBackIcon />
+        </IconButton>
+      </Link>
+      <Typography
+        variant="h3"
+        fontWeight="700"
+        gutterBottom
+        sx={{
+          textAlign: "center",
+          color: "#2c3e50",
+        }}
+      >
         Performers
       </Typography>
 
