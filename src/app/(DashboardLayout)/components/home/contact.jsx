@@ -40,7 +40,7 @@ const ContactPage = () => {
   };
 
   return (
-    <section className="h-screen w-full bg-gradient-to-r from-green-500 to-teal-600 flex flex-col items-center justify-center text-white px-6">
+    <section className="h-screen w-full bg-gradient-to-r from-green-500 to-teal-600 flex flex-col items-center justify-center text-white px-6 font-poppins">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
