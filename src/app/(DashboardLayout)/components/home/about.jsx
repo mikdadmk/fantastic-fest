@@ -12,10 +12,11 @@ const AboutPage = () => (
     >
       <h2 className="text-4xl font-bold mb-4">About the Fest</h2>
       <p className="text-lg md:text-xl text-gray-600">
-      Welcome to Fantastic 2k25, the premier arts and sports fest at Islamic Da'wa Academy! 
-      This annual event is dedicated to upskilling the talents of our exceptional Huffaz, 
-      who have memorized the Quran. Fantastic 2k25 features a diverse array of Islamic competitions. Join us in celebrating the rich
-      tapestry of Islamic arts and sports, as we foster creativity, knowledge, and excellence in our vibrant student community.
+        Welcome to Fantastic 2k25, the premier arts and sports fest at Islamic Da&apos;wa Academy! 
+        This annual event is dedicated to upskilling the talents of our exceptional Huffaz, 
+        who have memorized the Quran. Fantastic 2k25 features a diverse array of Islamic competitions. 
+        Join us in celebrating the rich tapestry of Islamic arts and sports, as we foster creativity, 
+        knowledge, and excellence in our vibrant student community.
       </p>
     </motion.div>
   </section>
