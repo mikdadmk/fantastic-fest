@@ -82,45 +82,53 @@ const AllPerformers: React.FC = () => {
         </Select>
       </FormControl>
 
-      {/* Performer List */}
-      {performers.map((performer) => (
-        <motion.div
-          key={performer.team + (performer.chestNumber || "")}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            marginBottom: "20px",
-            padding: "15px",
-            background: "white",
-            borderRadius: "8px",
-            cursor: "pointer",
-          }}
-          onClick={() => handlePerformerClick(performer)}
-        >
-          <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" spacing={3}>
-            {performer.image && <Avatar src={performer.image} alt={performer.name} sx={{ width: 80, height: 80 }} />}
-            <Box textAlign="center">
-              {performer.name && (
-                <Typography variant="h5" fontWeight="700" sx={{ color: "#34495e" }}>
-                  {performer.name}
+      {/* Performer Grid */}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr 1fr", sm: "repeat(5, 1fr)", md: "repeat(6, 1fr)" },
+          gap: 2,
+        }}
+      >
+        {performers.map((performer) => (
+          <motion.div
+            key={performer.team + (performer.chestNumber || "")}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              padding: "10px",
+              background: "white",
+              borderRadius: "8px",
+              cursor: "pointer",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            onClick={() => handlePerformerClick(performer)}
+          >
+            <Stack direction="column" alignItems="center" spacing={2}>
+              {performer.image && <Avatar src={performer.image} alt={performer.name} sx={{ width: 60, height: 60 }} />}
+              <Box textAlign="center">
+                {performer.name && (
+                  <Typography variant="h6" fontWeight="700" sx={{ color: "#34495e" }}>
+                    {performer.name}
+                  </Typography>
+                )}
+                <Typography variant="subtitle2" color="textSecondary">
+                  Total Mark: {performer.totalMark}
                 </Typography>
-              )}
-              <Typography variant="subtitle1" color="textSecondary">
-                Total Mark: {performer.totalMark}
-              </Typography>
-              {performer.chestNumber && (
+                {performer.chestNumber && (
+                  <Typography variant="body2" color="textSecondary">
+                    Chest Number: {performer.chestNumber}
+                  </Typography>
+                )}
                 <Typography variant="body2" color="textSecondary">
-                  Chest Number: {performer.chestNumber}
+                  Team: {performer.team}
                 </Typography>
-              )}
-              <Typography variant="body2" color="textSecondary">
-                Team: {performer.team}
-              </Typography>
-            </Box>
-          </Stack>
-        </motion.div>
-      ))}
+              </Box>
+            </Stack>
+          </motion.div>
+        ))}
+      </Box>
 
       {/* Modal for displaying detailed results */}
       <Dialog open={open} onClose={() => setOpen(false)}>
